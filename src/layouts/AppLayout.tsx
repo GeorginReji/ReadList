@@ -1,29 +1,39 @@
-import { FC, JSX } from 'react'
+import React from 'react'
 import { Outlet } from 'react-router-dom'
 import SideBar from '@/components/SideBar'
+import AppBar from '@/components/AppBar'
 import { Box, styled } from '@mui/material'
+import { colors } from '@/styles/colors'
 
-interface props {}
+interface LayoutProps {}
 
 const LayoutWrapper = styled(Box)(({ theme }) => ({
-	backgroundColor: '#10141F',
+	backgroundColor: colors.bgPrimary,
 	display: 'flex',
 	color: 'white',
 	overflowY: 'hidden',
-	height: '100vh',
 	gap: '1rem',
 	[theme.breakpoints.down('md')]: {
 		flexDirection: 'column',
 	},
 }))
 
-const AppLayout: FC<props> = (): JSX.Element => {
+const AppLayout: React.FC<LayoutProps> = () => {
+	const [open, setOpen] = React.useState(false)
+	const sideBarHandler = {
+		open,
+		setOpen,
+	}
 	return (
 		<LayoutWrapper>
-			<SideBar />
-			<div className='test'>
+			<SideBar {...sideBarHandler} />
+			<Box
+				component='main'
+				sx={{ display: 'flex', flexDirection: 'column', paddingTop: '64px' }}
+			>
+				<AppBar {...sideBarHandler} />
 				<Outlet />
-			</div>
+			</Box>
 		</LayoutWrapper>
 	)
 }

@@ -1,12 +1,12 @@
-import { FC, JSX } from 'react'
-
+import { Box, Typography } from '@mui/material'
+import { FC } from 'react'
 interface props {}
 
-const Home: FC<props> = (): JSX.Element => {
+const Home: FC<props> = () => {
 	return (
-		<div>
-			<h1>wtf text</h1>
-		</div>
+		<Box>
+			<Typography variant='h1'>wtf text</Typography>
+		</Box>
 	)
 }
 
